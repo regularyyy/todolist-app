@@ -1,0 +1,45 @@
+{% extends 'todoapp/layout.html' %}
+
+{% block title %}
+<title>Tasker</title>
+{% endblock %}
+
+{% block content %}
+<div style="font-family: sans-serif">
+<span class="span">Home:</span>
+<a style='text-decoration: none' href="{% url 'index' %}">On this page</a><br>
+<span>Search by tag:</span>
+<a style='text-decoration: none' href="{% url 'search_page' %}">On this page</a><br>
+
+<h1>Retrospective</h1>
+
+<div>
+
+<span>Completed tasks:</span>
+<a style='text-decoration: none' href={% url 'completed_tasks' %}>Completed tasks</a><br>
+
+<span>Incompleted tasks:</span>
+<a style='text-decoration: none' href={% url 'incompleted_tasks' %}>Incompleted tasks</a><br>
+
+<span>Counts:</span>
+<a style='text-decoration: none' href={% url 'task_counts' %}>Task counts</a><br>
+</div>
+
+<div>
+    <h3>Total Tasks: {{ total_count }}</h3>
+    <h3>Completed Tasks: {{ completed_count }}</h3>
+    <h3>Incomplete Tasks: {{ incompleted_count }}</h3>
+</div>
+
+<h1>Results:</h1>
+
+{% for todo in todo_list %}
+<div>
+    <h2>{{ todo.title }}</h2>
+    <p>Description: {{ todo.description }}</p>
+    <p>Due Date: {{ todo.due_date }} | Tag: {{ todo.tag }}</p>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

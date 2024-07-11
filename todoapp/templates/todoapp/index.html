@@ -1,0 +1,58 @@
+{% extends 'todoapp/layout.html' %}
+
+{% block title %}
+<title>Tasker</title>
+{% endblock %}
+
+{% block content %}
+
+<div style="font-family: sans-serif">
+
+    <h1>My task manager</h1>
+    <h3>Manage yout time!</h3>
+
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+
+        <div>
+            <label>New task:</label><br>
+            <input type="text" name="title" placeholder="Task name"><br>
+            <input type="text" name="tag" placeholder="Tag"><br>
+            <input type="text" name="description" placeholder="Description"><br>
+            <input type="date" name="due_date" placeholder="Due Date">
+        </div>
+
+        <button type="submit">Save</button>
+    </form><br>
+
+
+<span>Search by tag:</span>
+<a style='text-decoration: none' href="{% url 'search_page' %}">On this page</a><br>
+<span>Retrospective page:</span>
+<a style='text-decoration: none' href="{% url 'retrospective' %}">On this page</a>
+
+
+<h1>Your tasks:</h1>
+{% for todo in todo_list %}
+<div style="font-family: sans-serif">
+
+    <h2>{{ todo.title }}</h2>
+    <p>Description: {{ todo.description }}</p>
+    <p>Due Date: {{ todo.due_date }} | Tag: {{ todo.tag }}</p>
+
+    {% if todo.is_complete == False %}
+    <span >Not completed</span>
+
+    <a style='text-decoration: none' href="{% url 'update' todo_id=todo.id %}">Close</a>
+    {% else %}
+    <span>Complete</span>
+
+    <a style='text-decoration: none' href="{% url 'update' todo_id=todo.id %}">Open</a>
+    {% endif %}
+
+    <a style='text-decoration: none' href="{% url 'delete' todo_id=todo.id %}">Delete</a>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

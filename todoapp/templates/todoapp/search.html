@@ -1,0 +1,45 @@
+{% extends 'todoapp/layout.html' %}
+
+{% block title %}
+<title>Tasker</title>
+{% endblock %}
+
+{% block content %}
+<div style="font-family: sans-serif">
+<span>Go home:</span>
+<a style='text-decoration: none' href="{% url 'index' %}">Home</a><br>
+<span>Retrospective page:</span>
+<a style='text-decoration: none' href="{% url 'retrospective' %}">On this page</a>
+
+<h1>Search by tag:</h1>
+<form method="GET" action="{% url 'search' %}">
+    {% csrf_token %}
+    <label for="tag"></label>
+    <input type="text" id='tag' name="tag" placeholder="Tag">
+    <button type="submit">Search</button>
+</form>
+
+<h2>Results:</h2>
+{% for todo in todo_list %}
+
+<div>
+    <h2>{{ todo.title }}</h2>
+    <p>Description: {{ todo.description }}</p>
+    <p>Due Date: {{ todo.due_date }} | Tag: {{ todo.tag }}</p>
+
+    {% if todo.is_complete == False %}
+    <span >Not completed</span>
+
+    <a style='text-decoration: none' href="{% url 'update' todo_id=todo.id %}">Close</a>
+    {% else %}
+    <span>Complete</span>
+
+    <a style='text-decoration: none' href="{% url 'update' todo_id=todo.id %}">Open</a>
+    {% endif %}
+
+    <a style='text-decoration: none' href="{% url 'delete' todo_id=todo.id %}">Delete</a>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
