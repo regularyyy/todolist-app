@@ -16,9 +16,9 @@
 
         <div>
             <label>New task:</label><br>
-            <input type="text" name="title" placeholder="Task name" pattern=".*\S+.*" required><br>
-            <input type="text" name="tag" placeholder="Tag" pattern=".*\S+.*" required><br>
-            <input type="text" name="description" placeholder="Description" pattern=".*\S+.*" required><br>
+            <input type="text" name="title" placeholder="Task name" pattern="^[a-zA-Z\s]+$" title="Task name should contain only letters and spaces" required><br>
+            <input type="text" name="tag" placeholder="Tag" pattern="^[a-zA-Z\s]+$" title="Tag should contain only letters and spaces" required><br>
+            <input type="text" name="description" placeholder="Description" pattern="^[a-zA-Z\s]+$" title="Description should contain only letters and spaces" required><br>
             <input type="date" name="due_date" min="{% now 'Y-m-d' %}" placeholder="Due Date" required>
         </div>
 
@@ -61,8 +61,16 @@ function validateForm() {
 
     if (!title || !tag || !description) {
         alert("Fields cannot be empty or just spaces.");
-        return false; // Запобігає відправленню форми
+        return false; // Prevent form submission
     }
+
+    // Check for non-alphanumeric characters
+    const nonAlphaNumericPattern = /^[\w\s]+$/;
+    if (!nonAlphaNumericPattern.test(title) || !nonAlphaNumericPattern.test(tag) || !nonAlphaNumericPattern.test(description)) {
+        alert("Fields should not contain special characters.");
+        return false; // Prevent form submission
+    }
+
     return true;
 }
 </script>
