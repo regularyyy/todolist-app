@@ -19,7 +19,7 @@
             <input type="text" name="title" placeholder="Task name" pattern=".*\S+.*" required><br>
             <input type="text" name="tag" placeholder="Tag" pattern=".*\S+.*" required><br>
             <input type="text" name="description" placeholder="Description" pattern=".*\S+.*" required><br>
-            <input type="date" name="due_date" placeholder="Due Date" required>
+            <input type="date" name="due_date" min="{% now 'Y-m-d' %}" placeholder="Due Date" required>
         </div>
 
         <button type="submit">Save</button>
