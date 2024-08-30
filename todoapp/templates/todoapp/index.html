@@ -14,10 +14,17 @@
 
         <div>
             <label>New task:</label><br>
+<<<<<<< HEAD
             <input type="text" name="title" placeholder="Task name" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="tag" placeholder="Tag" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="description" placeholder="Description" pattern=".*[a-zA-Z].*" required><br>
             <input type="date" name="due_date" min="{{ timezone.now().date }}" placeholder="Due Date" required>
+=======
+            <input type="text" name="title" placeholder="Task name" required><br>
+            <input type="text" name="tag" placeholder="Tag" required><br>
+            <input type="text" name="description" placeholder="Description" required><br>
+            <input type="date" name="due_date" placeholder="Due Date" required>
+>>>>>>> 7fb062f (Update index.html)
         </div>
 
         <button type="submit">Save</button>
