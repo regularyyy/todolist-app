@@ -17,7 +17,7 @@
             <input type="text" name="title" placeholder="Task name" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="tag" placeholder="Tag" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="description" placeholder="Description" pattern=".*[a-zA-Z].*" required><br>
-            <input type="date" name="due_date" min="{{ timezone.now().date }}" placeholder="Due Date" required>
+            <input type="date" name="due_date" min="{% now 'Y-m-d' %}" placeholder="Due Date" required>
         </div>
 
         <button type="submit">Save</button>
