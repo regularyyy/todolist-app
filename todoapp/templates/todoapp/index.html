@@ -17,7 +17,7 @@
             <input type="text" name="title" placeholder="Task name" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="tag" placeholder="Tag" pattern=".*[a-zA-Z].*" required><br>
             <input type="text" name="description" placeholder="Description" pattern=".*[a-zA-Z].*" required><br>
-            <input type="date" name="due_date" min="{{ timezone.now().date }}" placeholder="Due Date" required>
+            <input type="date" name="due_date" min="{% now 'Y-m-d' %}" placeholder="Due Date" required>
         </div>
 
         <button type="submit">Save</button>
@@ -50,5 +50,22 @@
     </div>
     {% endfor %}
 </div>
+
+<script>
+    function validateForm() {
+    var title = document.forms[0]["title"].value;
+    var tag = document.forms[0]["tag"].value;
+    var description = document.forms[0]["description"].value;
+    var dueDate = document.forms[0]["due_date"].value;
+
+    if (title == "" || tag == "" || description == "" || dueDate == "") {
+        alert("Всі поля повинні бути заповнені");
+        return false;
+    }
+
+
+    return true; 
+}
+</script>
 
 {% endblock %}
